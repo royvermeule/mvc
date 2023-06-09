@@ -4,7 +4,8 @@
       "Models\\": "app/models/",
       "Controllers\\": "app/controllers/",
       "Libraries\\": "app/libraries/",
-      "Filters\\": "app/filters/"
+      "Filters\\": "app/filters/",
+      "Filters\\Elements\\": "app/filters/elements/"
     }
   },
   "require": {

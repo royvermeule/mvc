@@ -11,6 +11,12 @@ class ErrorHandler
    */
   public static function errorPopup(mixed $errors): string
   {
+    if (is_array($errors)) {
+      foreach ($errors as $values) {
+        $errors = $values;
+      }
+    }
+
     $errorMessage = '<div class="error-popup">
     <div class="error-message">
       ' . $errors . '

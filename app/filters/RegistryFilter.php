@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Filters;
 
+use Controllers\ErrorHandler;
+use Filters\Elements\DataImport;
+
 class RegistryFilter
 {
   private $html;
@@ -89,20 +92,9 @@ class RegistryFilter
       $html
     );
 
-    $dataRegistry = $this->dataRegistry($this->data);
-
-    $html = preg_replace_callback(
-      '/{(\w+)}/',
-      function ($match) use ($dataRegistry, &$errors) {
-        if (array_key_exists($match[1], $dataRegistry)) {
-          return $dataRegistry[$match[1]];
-        } else {
-          $errors[] = '"' . $match[1] . '" is not included in the dataRegistry().';
-          return '';
-        }
-      },
-      $html
-    );
+    $DataImport = new DataImport($this->html, $this->data);
+    $lel = $DataImport->Data();
+    $html = $lel;
 
     $pageTypeRegistry = $this->pageTypeRegistry();
 
@@ -134,7 +126,7 @@ class RegistryFilter
 
     $html = preg_replace_callback(
       '/<a:button\s+([\w\s="\/]+)>(.*?)<\/a:button>/',
-      function ($match) {
+      function ($match) use (&$errors) { // Add the &$errors reference
         $attributes = $match[1];
         $buttonText = $match[2];
         $attributePairs = explode('" ', $attributes);
@@ -155,6 +147,8 @@ class RegistryFilter
           }
 
           return sprintf('<a href="%s"><button%s>%s</button></a>', $href, $attributeString, $buttonText);
+        } else {
+          $errors[] = 'A a:button must always contain an href attribute!'; // Add error message to the $errors array
         }
 
         return '';
@@ -165,7 +159,7 @@ class RegistryFilter
 
     if (!empty($errors)) {
       $errorMessage = '<p>' . implode('</p><p>', $errors) . '</p>';
-      echo $errorMessage;
+      echo ErrorHandler::errorPopup($errorMessage);
     }
 
     return $html;
@@ -194,16 +188,6 @@ class RegistryFilter
     $includeRegistry = [];
 
     return $includeRegistry;
-  }
-
-  private function dataRegistry($data): mixed
-  {
-    $data = array_merge($data, [
-      'urlroot' => URLROOT,
-      'dtz' => DTZ
-    ]);
-
-    return $data;
   }
 
   private function pageTypeRegistry(): mixed
