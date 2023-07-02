@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Filters;
 
+use Controllers\Encrypter;
 use Controllers\ErrorHandler;
 use Filters\Elements\DataImport;
 use Filters\Elements\DataVariable;
@@ -48,9 +49,10 @@ class Filter
     $linkButton = new LinkButton($html);
     $html = $linkButton->Linkbutton();
 
-    if (!empty($errors)) {
-      $errorMessage = '<p>' . implode('</p><p>', $errors) . '</p>';
-      echo ErrorHandler::errorPopup($errorMessage);
+    if (isset($_SESSION)) {
+      $encrypter = new Encrypter();
+      $decryptedErrors = $encrypter->decryptArray($_SESSION['errors']);
+      echo ErrorHandler::errorPopup($decryptedErrors);
     }
 
     return $html;

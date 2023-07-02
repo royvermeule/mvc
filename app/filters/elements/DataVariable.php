@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Filters\Elements;
 
+use Controllers\ErrorsStorer;
+
 class DataVariable
 {
   private string $html;
@@ -32,6 +34,10 @@ class DataVariable
         },
         $this->html
     );
+
+    if (!empty($errors)) {
+      ErrorsStorer::storeErrors($errors);
+    }
 
     return $dataVar;
   }

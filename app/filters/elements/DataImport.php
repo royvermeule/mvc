@@ -4,17 +4,26 @@ declare(strict_types=1);
 
 namespace Filters\Elements;
 
+use Controllers\ErrorsStorer;
+
 class DataImport
 {
   private ?string $html;
   private array $data;
 
+  /**
+   * @param array $data
+   * @param string|null $html
+   */
   public function __construct(array $data, ?string $html = null)
   {
     $this->html = $html;
     $this->data = $data;
   }
 
+  /**
+   * @return string
+   */
   public function Data(): string
   {
     $html = $this->html;
@@ -34,11 +43,14 @@ class DataImport
       $html
     );
 
+    if (!empty($errors)) {
+      ErrorsStorer::storeErrors($errors);
+    }
+
     return $html;
   }
 
   /**
-   * @param $data
    * @return array
    */
   public function dataRegistry(): array

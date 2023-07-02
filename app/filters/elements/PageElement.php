@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Filters\Elements;
 
+use Controllers\ErrorsStorer;
+
 class PageElement
 {
   private string $html;
@@ -44,6 +46,10 @@ class PageElement
         },
         $this->html
     );
+
+    if (!empty($errors)) {
+      ErrorsStorer::storeErrors($errors);
+    }
 
     return $this->html;
   }
