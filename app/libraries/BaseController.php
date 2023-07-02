@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace Libraries;
 
-use Filters\RegistryFilter;
+use Filters\Filter;
 
 class BaseController
 {
   /**
-   * Checking if the file exists.
-   * Then getting the file contents and filtering it.
+   * @param $view
+   * @param array $data
+   * @return void
    */
-  public function view($view, $data = [])
+  public function view($view, array $data = []): void
   {
     if (file_exists('../app/views/' . $view . '.php')) {
 
       require_once '../app/views/' . $view . '.php';
       $html = ob_get_clean();
 
-      $registryFilter = new RegistryFilter($html, $data);
+      $registryFilter = new Filter($html, $data);
       $html = $registryFilter->filter();
 
       //htmlHiddenComment

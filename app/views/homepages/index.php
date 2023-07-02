@@ -11,7 +11,6 @@
     <main>
       <a:button href="">{urlroot}</a:button>
       <include file="views/test">
-        {urlroot}
     </main>
     <footer>
 

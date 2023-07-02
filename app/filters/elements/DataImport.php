@@ -6,10 +6,10 @@ namespace Filters\Elements;
 
 class DataImport
 {
-  private $html;
-  private $data;
+  private ?string $html;
+  private array $data;
 
-  public function __construct(string $html, array $data)
+  public function __construct(array $data, ?string $html = null)
   {
     $this->html = $html;
     $this->data = $data;
@@ -37,13 +37,15 @@ class DataImport
     return $html;
   }
 
-  private function dataRegistry($data): mixed
+  /**
+   * @param $data
+   * @return array
+   */
+  public function dataRegistry(): array
   {
-    $data = array_merge($data, [
+    return array_merge($this->data, [
       'urlroot' => URLROOT,
       'dtz' => DTZ
     ]);
-
-    return $data;
   }
 }
