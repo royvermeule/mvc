@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Filters;
 
-use Controllers\Encrypter;
-use Controllers\ErrorHandler;
 use Filters\Elements\DataImport;
 use Filters\Elements\DataVariable;
 use Filters\Elements\HeadElement;
 use Filters\Elements\IncludeElement;
 use Filters\Elements\LinkButton;
 use Filters\Elements\PageElement;
+use Handlers\ErrorHandler;
+use Utility\Encrypter;
 
 class Filter
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Controllers;
+namespace Utility;
 
 use Libraries\BaseController;
 

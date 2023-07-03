@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Filters\Elements;
 
-use Controllers\ErrorsStorer;
+use Utility\ErrorsStorer;
 
 class IncludeElement
 {

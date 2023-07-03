@@ -5,7 +5,9 @@
       "Controllers\\": "app/controllers/",
       "Libraries\\": "app/libraries/",
       "Filters\\": "app/filters/",
-      "Filters\\Elements\\": "app/filters/elements/"
+      "Filters\\Elements\\": "app/filters/elements/",
+      "Handlers\\": "app/handlers",
+      "Utility\\": "app/utility"
     }
   },
   "require": {

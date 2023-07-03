@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Controllers;
 
-use Controllers\HashCreator;
 use Libraries\BaseController;
 use Models\HomeModel;
 
