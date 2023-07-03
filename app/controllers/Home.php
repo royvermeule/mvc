@@ -16,6 +16,7 @@ class Home extends BaseController
     $this->homeModel = new HomeModel();
   }
 
+
   public function index(): void
   {
     $data = [

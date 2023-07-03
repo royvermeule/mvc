@@ -6,11 +6,11 @@ namespace Utility;
 
 class ErrorsStorer
 {
-    /**
-     * @param array $errors
-     * @param bool $auth
-     * @return void
-     */
+  /**
+   * @param array $errors
+   * @param bool $auth
+   * @return void
+   */
   public static function storeErrors(array $errors, bool $auth = false): void
   {
     $encrypter = new Encrypter();
@@ -32,10 +32,10 @@ class ErrorsStorer
     }
   }
 
-    /**
-     * @param bool $auth
-     * @return array
-     */
+  /**
+   * @param bool $auth
+   * @return array
+   */
   public static function getErrors(bool $auth): array
   {
     if (session_status() === PHP_SESSION_NONE) {
