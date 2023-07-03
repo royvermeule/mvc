@@ -39,8 +39,8 @@ class Filter
     $dataVar = $dataVarElement->dataVariable();
     $this->data = array_merge($this->data, $dataVar);
 
-    $headElement = new HeadElement($html, $this->data);
-    $html = $headElement->head();
+//    $dataImport = new DataImport($this->data, $this->html);
+//    $html = $dataImport->data(); Also build into the headElement
 
     $includeElement = new IncludeElement($html);
     $html = $includeElement->include();
@@ -51,8 +51,8 @@ class Filter
     $linkButton = new LinkButton($html);
     $html = $linkButton->Linkbutton();
 
-    $dataImport = new DataImport($this->data, $this->html);
-    $html = $dataImport->data();
+    $headElement = new HeadElement($html, $this->data);
+    $html = $headElement->head();
 
     if (isset($_SESSION)) {
       $encrypter = new Encrypter();
