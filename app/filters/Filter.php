@@ -18,17 +18,22 @@ class Filter
   private string $html;
   private array $data;
 
+  /**
+   * @param $html
+   * @param $data
+   */
   public function __construct($html, $data)
   {
     $this->html = $html;
     $this->data = $data;
   }
 
+  /**
+   * @return string
+   */
   public function filter(): string
   {
     $html = $this->html;
-
-    $errors = array();
 
     $dataVarElement = new DataVariable($this->html);
     $dataVar = $dataVarElement->dataVariable();

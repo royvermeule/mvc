@@ -20,7 +20,7 @@ class ErrorHandler
 
     $errorMessage = '<div class="error-popup">
     <div class="error-message">
-      ' . $errors . '
+      <p>' . $errors . '</p>
       <span class="close-btn">&times;</span>
     </div>
   </div>
