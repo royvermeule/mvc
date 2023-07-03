@@ -8,9 +8,13 @@ use Libraries\BaseController;
 
 class HashCreator extends BaseController
 {
-  private $checkedHash;
-  private $hashArray;
+  private string $checkedHash;
+  private array $hashArray;
 
+    /**
+     * @param array $dataArray
+     * @return void
+     */
   public function createArrayHashCodes(array $dataArray): void
   {
     $this->hashArray = array();
@@ -21,6 +25,10 @@ class HashCreator extends BaseController
     }
   }
 
+    /**
+     * @param string $hashToCheck
+     * @return bool
+     */
   public function checkArrayHashCode(string $hashToCheck): bool
   {
     if (isset($this->hashArray[$hashToCheck])) {
@@ -30,6 +38,9 @@ class HashCreator extends BaseController
     return false;
   }
 
+    /**
+     * @return mixed
+     */
   public function getHashArrayValue(): mixed
   {
     if (isset($this->hashArray[$this->checkedHash])) {
@@ -38,16 +49,26 @@ class HashCreator extends BaseController
     return null;
   }
 
-  public function getArrayHashKeys(): mixed
+    /**
+     * @return mixed
+     */
+  public function getArrayHashKeys(): array
   {
     return array_keys($this->hashArray);
   }
 
-  public function getHashArray(): mixed
+    /**
+     * @return array
+     */
+  public function getHashArray(): array
   {
     return $this->hashArray;
   }
 
+    /**
+     * @param $hashArray
+     * @return void
+     */
   public function setHashArray($hashArray): void
   {
     $this->hashArray = $hashArray;

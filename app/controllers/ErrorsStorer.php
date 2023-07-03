@@ -6,10 +6,11 @@ namespace Controllers;
 
 class ErrorsStorer
 {
-  /**
-   * @var array $errors
-   * @var bool $auth
-   */
+    /**
+     * @param array $errors
+     * @param bool $auth
+     * @return void
+     */
   public static function storeErrors(array $errors, bool $auth = false): void
   {
     $encrypter = new Encrypter();
@@ -31,11 +32,10 @@ class ErrorsStorer
     }
   }
 
-  /**
-   * @var bool $auth
-   * 
-   * @return array $decryptedErrors
-   */
+    /**
+     * @param bool $auth
+     * @return array
+     */
   public static function getErrors(bool $auth): array
   {
     if (session_status() === PHP_SESSION_NONE) {

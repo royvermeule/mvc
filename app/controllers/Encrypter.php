@@ -8,6 +8,11 @@ use Libraries\BaseController;
 
 class Encrypter extends BaseController
 {
+    /**
+     * @param $data
+     * @param $key
+     * @return string
+     */
   public function encryptArray($data, $key = ';alkjdf83io8'): string
   {
     $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
@@ -16,6 +21,11 @@ class Encrypter extends BaseController
     return base64_encode(json_encode($result));
   }
 
+    /**
+     * @param $encryptedData
+     * @param $key
+     * @return array
+     */
   public function decryptArray($encryptedData, $key = ';alkjdf83io8'): array
   {
     $data = json_decode(base64_decode($encryptedData), true);

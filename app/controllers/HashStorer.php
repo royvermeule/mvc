@@ -8,6 +8,11 @@ use Libraries\BaseController;
 
 class HashStorer extends BaseController
 {
+    /**
+     * @param array $hashArray
+     * @param $encreptionKey
+     * @return void
+     */
   public static function setHashArray(array $hashArray, $encreptionKey): void
   {
     if (session_status() === PHP_SESSION_NONE) {

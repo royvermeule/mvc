@@ -6,9 +6,10 @@ namespace Controllers;
 
 class ErrorHandler
 {
-  /**
-   * @param mixed $errors
-   */
+    /**
+     * @param mixed $errors
+     * @return string
+     */
   public static function errorPopup(mixed $errors): string
   {
     if (is_array($errors)) {

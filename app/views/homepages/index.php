@@ -9,8 +9,7 @@
 
     </header>
     <main>
-      <a:button href="">{urlroot}</a:button>
-      <include file="views/test">
+      <h2>{modelMessage}</h2>
     </main>
     <footer>
 

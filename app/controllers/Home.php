@@ -6,21 +6,22 @@ namespace Controllers;
 
 use Controllers\HashCreator;
 use Libraries\BaseController;
-use Models\HomepageModel;
+use Models\HomeModel;
 
 class Home extends BaseController
 {
-  private $homeModel;
+  private HomeModel $homeModel;
 
   public function __construct()
   {
-    $this->homeModel = new HomepageModel();
+    $this->homeModel = new HomeModel();
   }
 
   public function index(): void
   {
     $data = [
-      'title' => 'Home'
+      'title' => 'Home',
+      'modelMessage' => $this->homeModel->index()
     ];
 
     $this->view('homepages/index', $data);

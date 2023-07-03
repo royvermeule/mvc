@@ -34,9 +34,6 @@ class Filter
     $dataVar = $dataVarElement->dataVariable();
     $this->data = array_merge($this->data, $dataVar);
 
-    $dataImport = new DataImport($this->data, $this->html);
-    $html = $dataImport->data();
-
     $headElement = new HeadElement($html, $this->data);
     $html = $headElement->head();
 
@@ -48,6 +45,9 @@ class Filter
 
     $linkButton = new LinkButton($html);
     $html = $linkButton->Linkbutton();
+
+    $dataImport = new DataImport($this->data, $this->html);
+    $html = $dataImport->data();
 
     if (isset($_SESSION)) {
       $encrypter = new Encrypter();
