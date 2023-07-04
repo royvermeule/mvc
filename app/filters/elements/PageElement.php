@@ -23,7 +23,7 @@ class PageElement
     $pageTypeRegistry = $this->pageTypeRegistry();
     $this->html = preg_replace_callback(
         '/<page\s+([\w\s="]+)\>/',
-        function ($match) use ($pageTypeRegistry, &$errors) {
+        static function ($match) use ($pageTypeRegistry, &$errors) {
           $attributes = array();
           if (preg_match_all('/(\w+)\s*=\s*"([^"]+)"/', $match[1], $attributeMatches, PREG_SET_ORDER)) {
             foreach ($attributeMatches as $attributeMatch) {

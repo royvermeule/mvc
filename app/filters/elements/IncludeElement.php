@@ -25,7 +25,7 @@ class IncludeElement
   {
     $this->html = preg_replace_callback(
         '/<include\s+([\w\/\s="]+)\>/',
-        function ($match) use (&$errors) {
+        static function ($match) use (&$errors) {
           $attributes = array();
           if (preg_match_all('/(\w+)\s*=\s*"([^"]+)"/', $match[1], $attributeMatches, PREG_SET_ORDER)) {
             foreach ($attributeMatches as $attributeMatch) {

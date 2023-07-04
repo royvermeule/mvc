@@ -27,17 +27,13 @@ class DataVariable
 
     $this->html = preg_replace_callback(
         '/<d:var\s+name="([^"]+)"\s+value="([^"]+)"\s*\>/',
-        function ($match) use (&$dataVar) {
+        static function ($match) use (&$dataVar) {
           $name = $match[1];
           $value = $match[2];
           $dataVar[$name] = $value;
         },
         $this->html
     );
-
-    if (!empty($errors)) {
-      ErrorsStorer::storeErrors($errors);
-    }
 
     return $dataVar;
   }

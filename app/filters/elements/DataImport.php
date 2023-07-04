@@ -32,7 +32,7 @@ class DataImport
 
     $html = preg_replace_callback(
       '/{(\w+)}/',
-      function ($match) use ($dataRegistry, &$errors) {
+      static function ($match) use ($dataRegistry, &$errors) {
         if (array_key_exists($match[1], $dataRegistry)) {
           return $dataRegistry[$match[1]];
         } else {

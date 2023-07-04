@@ -22,7 +22,7 @@ class LinkButton
   {
     $this->html = preg_replace_callback(
         '/<a:button\s+([\w\s="\/]+)>(.*?)<\/a:button>/',
-        function ($match) use (&$errors) { // Add the &$errors reference
+        static function ($match) use (&$errors) { // Add the &$errors reference
           $attributes = $match[1];
           $buttonText = $match[2];
           $attributePairs = explode('" ', $attributes);

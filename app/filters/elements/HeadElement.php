@@ -25,7 +25,7 @@ class HeadElement
     $headRegistry = $this->headRegistry();
     $this->html = preg_replace_callback(
         '/<head\s+([\w\s="]+)>/',
-        function ($match) use ($headRegistry, &$errors) {
+        static function ($match) use ($headRegistry, &$errors) {
           $attributes = array();
           if (preg_match_all('/(\w+)\s*=\s*"([^"]+)"/', $match[1], $attributeMatches, PREG_SET_ORDER)) {
             foreach ($attributeMatches as $attributeMatch) {
@@ -54,7 +54,7 @@ class HeadElement
 
     $this->html = preg_replace_callback(
         '/{(\w+)}/',
-        function ($match) use ($dataRegistry, &$errors) {
+        static function ($match) use ($dataRegistry, &$errors) {
           if (array_key_exists($match[1], $dataRegistry)) {
             return $dataRegistry[$match[1]];
           } else {
