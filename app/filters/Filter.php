@@ -54,7 +54,7 @@ class Filter
     $headElement = new HeadElement($html, $this->data);
     $html = $headElement->head();
 
-    if (isset($_SESSION)) {
+    if (isset($_SESSION['errors'])) {
       $encrypter = new Encrypter();
       $decryptedErrors = $encrypter->decryptArray($_SESSION['errors']);
       echo ErrorHandler::errorPopup($decryptedErrors);

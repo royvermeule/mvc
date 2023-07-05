@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Libraries;
 
 use Controllers\Errors\NotFound;
+use Utility\PageLogger;
 
 class Core
 {
@@ -56,6 +57,13 @@ class Core
     }
 
     if (!$controllerNotFound && !$methodNotFound) {
+      $checkCurrentPage = PageLogger::checkCurrentPage($this->currentController->__toString(), $this->currentMethod);
+      if ($checkCurrentPage) {
+        PageLogger::logCurrentPage($this->currentController->__toString(), $this->currentMethod);
+      }
+
+      var_dump(PageLogger::getLastPage());
+      echo $this->currentMethod;
       // Get params
       $this->params = $url ? array_values($url) : [];
       $this->params2 = []; // Initialize the second parameter as an empty array

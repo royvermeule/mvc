@@ -13,7 +13,7 @@ class Encrypter extends BaseController
      * @param $key
      * @return string
      */
-  public function encryptArray($data, $key = ';alkjdf83io8'): string
+  public function encryptArray(array $data, $key = ';alkjdf83io8'): string
   {
     $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
     $encryptedData = openssl_encrypt(json_encode($data), 'aes-256-cbc', $key, 0, $iv);

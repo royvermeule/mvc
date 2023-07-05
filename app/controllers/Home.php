@@ -26,4 +26,12 @@ class Home extends BaseController
 
     $this->view('homepages/index', $data);
   }
+
+  public function test()
+  {}
+
+
+  public function __toString() {
+    return 'Home';
+  }
 }
