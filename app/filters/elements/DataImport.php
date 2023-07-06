@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Filters\Elements;
 
 use Utility\ErrorsStorer;
+use Utility\Session;
 
 class DataImport
 {
@@ -55,9 +56,12 @@ class DataImport
    */
   public function dataRegistry(): array
   {
+    Session::startSession();
+    $lastPage = $_SESSION['lastPage'];
     return array_merge($this->data, [
       'urlroot' => URLROOT,
-      'dtz' => DTZ
+      'dtz' => DTZ,
+      'lastPage' => "$lastPage[0]/$lastPage[1]"
     ]);
   }
 }

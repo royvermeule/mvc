@@ -6,6 +6,7 @@ namespace Libraries;
 
 use Controllers\Errors\NotFound;
 use Utility\PageLogger;
+use Utility\Session;
 
 class Core
 {
@@ -57,18 +58,16 @@ class Core
     }
 
     if (!$controllerNotFound && !$methodNotFound) {
-      $checkCurrentPage = PageLogger::checkCurrentPage($this->currentController->__toString(), $this->currentMethod);
-      if ($checkCurrentPage) {
-        PageLogger::logCurrentPage($this->currentController->__toString(), $this->currentMethod);
+      Session::startSession();
+
+      if ($this->checkCurrentPage()) {
+        $this->storeLastPage();
       }
 
-      var_dump(PageLogger::getLastPage());
-      echo $this->currentMethod;
-      // Get params
+      $_SESSION['currentPage'] = [$this->currentController->__toString(), $this->currentMethod];
       $this->params = $url ? array_values($url) : [];
       $this->params2 = []; // Initialize the second parameter as an empty array
 
-      // Call a callback with array of params
       call_user_func_array([$this->currentController, $this->currentMethod], array_merge($this->params, $this->params2));
     }
   }
@@ -84,8 +83,33 @@ class Core
       $url = explode('/', $url);
       return $url;
     } else {
-      $url = array('pages', 'index');
+      $url = ['pages', 'index'];
       return $url;
     }
+  }
+
+  protected function storeLastPage(): void
+  {
+    $currentPage = $_SESSION['currentPage'];
+
+    if (!isset($_SESSION['lastPage'])) {
+      // Set the lastPage initially
+      $_SESSION['lastPage'] = $currentPage;
+    } else {
+      // Update lastPage if necessary
+      $lastPage = $_SESSION['lastPage'];
+      if ($lastPage[0] !== $currentPage[0] || $lastPage[1] !== $currentPage[1]) {
+        $_SESSION['lastPage'] = $currentPage;
+      }
+    }
+  }
+
+  private function checkCurrentPage(): bool
+  {
+    $currentPage = $_SESSION['currentPage'];
+    if ($currentPage[0] === $this->currentController->__toString() && $currentPage[1] === $this->currentMethod) {
+      return false;
+    }
+    return true;
   }
 }
